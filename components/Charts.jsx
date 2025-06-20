@@ -89,43 +89,78 @@ export default function Charts({ articles }) {
         </ResponsiveContainer>
       </div>
 
-      {/* Bar Chart: Top Authors */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-        <h3 className="font-semibold mb-2 text-sm text-gray-900 dark:text-white">✍️ Top Authors (by article count)</h3>
-        <ResponsiveContainer width="100%" height={180}>
-          <BarChart data={topAuthors}>
-            <XAxis dataKey="name" fontSize={10} />
-            <YAxis fontSize={10} />
-            <Tooltip
-              contentStyle={{ backgroundColor: '#ffffff', color: '#000000', borderRadius: '8px' }}
-              labelStyle={{ color: '#000000' }}
-            />
-            <Bar dataKey="value" fill="#34D399" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+   {/* Bar Chart: Top Authors */}
+<div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow sm:col-span-2">
+  <h3 className="font-semibold mb-4 text-sm text-center text-gray-900 dark:text-white">
+    ✍️ Top Authors (by article count)
+  </h3>
+  <ResponsiveContainer width="100%" height={250}>
+    <BarChart
+      data={topAuthors}
+      margin={{ top: 10, right: 30, left: 20, bottom: 30 }}
+      barCategoryGap="20%" // space between bars
+      barGap={5}
+    >
+      <XAxis
+        dataKey="name"
+        fontSize={12}
+        tick={{ fill: '#ccc' }}
+        interval={0}
+        angle={-20}
+        textAnchor="end"
+      />
+      <YAxis fontSize={12} tick={{ fill: '#ccc' }} />
+      <Tooltip
+        contentStyle={{
+          backgroundColor: '#fff',
+          color: '#000',
+          borderRadius: '8px',
+        }}
+        labelStyle={{ color: '#000' }}
+      />
+      <Bar dataKey="value" fill="#34D399" radius={[4, 4, 0, 0]} />
+    </BarChart>
+  </ResponsiveContainer>
+</div>
+
 
       {/* Pie Chart: Author-wise Payouts */}
-      <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-        <h3 className="font-semibold mb-2 text-sm text-gray-900 dark:text-white">💸 Author-wise Payout Distribution</h3>
-        <ResponsiveContainer width="100%" height={180}>
-          <PieChart>
-            <Pie
-              data={payoutPieData}
-              dataKey="value"
-              nameKey="name"
-              outerRadius={60}
-              label fontSize={10}
-            >
-              {payoutPieData.map((_, idx) => (
-                <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
-              ))}
-            </Pie>
-            <Legend wrapperStyle={{ fontSize: 10 }} />
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
+<div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow col-span-1 sm:col-span-2">
+  <h3 className="font-semibold mb-4 text-base sm:text-lg text-gray-900 dark:text-white">
+    💸 Author-wise Payout Distribution
+  </h3>
+  <ResponsiveContainer width="100%" height={280}>
+    <PieChart>
+      <Pie
+        data={payoutPieData}
+        dataKey="value"
+        nameKey="name"
+        outerRadius={80}
+        label={({ name, value }) => `${name} (${value})`}
+        isAnimationActive
+      >
+        {payoutPieData.map((_, idx) => (
+          <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
+        ))}
+      </Pie>
+      <Tooltip
+        contentStyle={{
+          backgroundColor: '#ffffff',
+          color: '#000000',
+          borderRadius: '8px',
+        }}
+        labelStyle={{ color: '#000000' }}
+      />
+      <Legend
+        layout="horizontal"
+        verticalAlign="bottom"
+        align="center"
+        wrapperStyle={{ fontSize: 12, marginTop: '12px' }}
+      />
+    </PieChart>
+  </ResponsiveContainer>
+</div>
+
     </div>
   )
 }

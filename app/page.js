@@ -26,7 +26,7 @@ export default function Dashboard() {
     setArticlePayouts
   } = useUser()
 
-  // 🔐 Auth Check
+  // Auth Check
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const isLoggedIn = localStorage.getItem('auth')
@@ -36,7 +36,7 @@ export default function Dashboard() {
     }
   }, [router])
 
-  // 📡 Fetch Articles
+  // Fetch Articles
   useEffect(() => {
     const fetchArticles = async () => {
       const res = await fetch(`https://newsdata.io/api/1/news?country=in&language=en&apikey=${process.env.NEXT_PUBLIC_NEWSDATA_API_KEY}`)
@@ -50,7 +50,7 @@ export default function Dashboard() {
     fetchArticles()
   }, [])
 
-  // 🧮 Filters
+  //  Filters
   const handleFilter = ({ searchTerm, author, type }) => {
   const filtered = articles.filter(article => {
     const lowerSearch = searchTerm.toLowerCase()
@@ -96,6 +96,7 @@ export default function Dashboard() {
       <div className="mt-4 px-4 md:px-8">
         <Filters articles={articles} onFilter={handleFilter} />
       </div>
+      
 
       {/* 💸 Admin Payout Controls */}
       {isAdmin && (
@@ -121,7 +122,7 @@ export default function Dashboard() {
           </div>
         </div>
       )}
-
+      
       {/* 📊 Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-8">
         <StatCard title="🗞️ Total Articles" value={totalArticles} trend="+12.5%" color="blue" />
@@ -129,19 +130,19 @@ export default function Dashboard() {
         <StatCard title="🏷️ Categories Found" value={types.length} trend="+3.5%" color="emerald" />
         <StatCard title="💸 Total Payout" value={`₹${totalPayout}`} color="rose" />
       </div>
-
-      {/* 📈 Charts */}
+     
+      {/* Charts */}
       {!loading && (
         <div className="px-4 md:px-8">
           <Charts articles={filteredArticles} />
         </div>
       )}
 
-      {/* 🧾 Table & Export */}
+      {/* Table & Export */}
       <div className="px-4 md:px-8 space-y-6">
         <PayoutTable articles={filteredArticles} />
         <ExportMenu articles={filteredArticles} />
-        <ArticleSlider articles={filteredArticles} />
+         <ArticleSlider articles={filteredArticles} />
       </div>
     </div>
   )

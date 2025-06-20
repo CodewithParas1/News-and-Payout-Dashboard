@@ -18,7 +18,7 @@ export default function Filters({ articles, onFilter }) {
    <div className="bg-white dark:bg-gray-800 dark:text-gray-300 p-2 rounded-lg shadow flex flex-wrap items-center gap-4 sm:gap-6 justify-between">
   <input
     type="text"
-    placeholder="🔍 Search keyword"
+    placeholder="🔍 Search author_name or articles or keywords"
     value={searchTerm}
     onChange={(e) => setSearchTerm(e.target.value)}
     className="flex-1 min-w-[180px] border dark:border-gray-600 px-3 py-2 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"

@@ -23,7 +23,7 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-blue-200 dark:bg-gray-800 text-white shadow-md p-4 px-6 flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-0 items-center">
+    <header className="bg-green-300 dark:bg-gray-800 text-white shadow-md p-4 px-6 flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-0 items-center">
       {/* Left: User Role */}
       <div className="text-sm text-black dark:text-gray-300 w-full sm:w-1/3 text-center sm:text-left">
         👤 Logged in as <strong>{isAdmin ? 'Admin' : 'User'}</strong>
